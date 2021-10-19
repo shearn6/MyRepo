@@ -1,0 +1,71 @@
+import datetime # imports datetime file to show date and time of inputs
+date = datetime.date.today()
+store = [] # name of the store
+location = [] # where is the store located
+money = []
+def get_key(arg, dic):
+    for key, value in dic.items():
+        if value == arg:
+            return key
+
+
+while True:
+    beginning = input("Would you like to add a store, location and total?\n Y|n\n").lower() # begins program
+    if beginning == "y" or beginning == "":
+        try:
+            store.append(input("What is the name of the Store?\n"))
+            location.append(input("Where is the store located?\n"))
+            pennies = float(input("Enter count of pennies: ")) # sam assisted me with the math part here
+            nickels = float(input("Enter count of nickels: ")) # this takes the amount of each amount of currency
+            dimes = float(input("Enter count of dimes: "))
+            quarters = float(input("Enter count of quarters: "))
+            ones = float(input("Enter count of $1 bills: "))
+            five = float(input("Enter count of $5 bills: "))
+            ten = float(input("Enter count of $10 bills: "))
+            twenty = float(input("Enter count of $20 bills: "))
+            fifty = float(input("Enter count of $50 bills: "))
+            hundred = float(input("Enter count of $100 bills: "))
+            Penny = .01 # this is the amount that each point of currency represents for the math to occur later
+            Nickel = .05
+            Dime = .10
+            Quarter = .25
+            One = 1.00
+            Five = 5.00
+            Ten = 10.00
+            Twenty = 20.00
+            Fifty = 50.00
+            Hundred = 100.00
+            pennies *= Penny
+            nickels *= Nickel
+            dimes *= Dime
+            quarters *= Quarter
+            ones *= One
+            five *= Five
+            ten *= Ten
+            twenty *= Twenty
+            fifty *= Fifty
+            hundred *= Hundred
+            change = pennies + nickels + dimes + quarters # this add up the change
+            bill = ones + five + ten + twenty + fifty + hundred # this add up the bills
+            money.append(bill + change) # this puts the bills and change together to get an overall money total
+            continue
+        except ValueError:
+            print("That input was incorrect")
+            continue
+    elif beginning ==  "n":
+        break
+    else:
+        print("That input was incorrect") # catches invalid inputs (not yes or no)
+        continue
+
+file = "".join("{} had a total = ${}.\n        ".format(x, y) for x, y in zip(store, money)) # each store total
+files = "".join("{} had a total = ${}.\n        ".format(x, y) for x, y in zip(store, money))
+overall = round(sum(map(float, money)), 2)
+print(f"On {date}: {file}")
+print(f"On {date}, the overall total was ${overall}.") # overall store totals (added up)
+file = open("Company_Total.txt", "a") # creating a text file
+file.write(f"{date}: {files}")
+file.write(f"{date}: the total = ${overall}.")
+
+# i was really struggling on the math part and Sam helped guide me, and while i didnt know how to do it,
+# this is not the path i wouldve taken, i was trying to use less lines of code
